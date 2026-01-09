@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Footage | AI that finds your perfect video clips</title>
+    <link rel="icon" type="image/png" href="https://cdn.footage.com/logo-sq.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,74 +24,153 @@
             overflow-x: hidden;
         }
 
-        /* Hero Background with Clouds */
+        /* Hero Background - Soft sky blue gradient like Fyxer */
         .hero-wrapper {
             position: relative;
-            background: linear-gradient(180deg, #e3f0f5 0%, #eef6f9 40%, #f5f9fb 70%, #fff 100%);
-            padding-bottom: 80px;
+            background: linear-gradient(180deg,
+                #dbe9f0 0%,
+                #e4eff4 20%,
+                #eaf3f7 40%,
+                #f0f6f9 60%,
+                #f7fafc 80%,
+                #ffffff 100%
+            );
+            padding-bottom: 120px;
             overflow: hidden;
         }
 
-        /* Cloud layers */
-        .cloud-layer {
+        /* Cloud System - Realistic fluffy clouds */
+        .clouds-container {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 400px;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Individual cloud puffs using multiple box-shadows for fluffy effect */
+        .cloud {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+
+        /* Large cloud cluster - left side */
+        .cloud-1 {
+            width: 300px;
+            height: 100px;
+            bottom: 80px;
+            left: -50px;
+            background: #fff;
+            border-radius: 100px;
+            box-shadow:
+                80px -40px 0 20px rgba(255,255,255,0.95),
+                160px -20px 0 40px rgba(255,255,255,0.9),
+                220px -50px 0 25px rgba(255,255,255,0.95),
+                40px -60px 0 30px rgba(255,255,255,0.9),
+                120px -70px 0 35px rgba(255,255,255,0.95),
+                280px -30px 0 20px rgba(255,255,255,0.85);
+            filter: blur(2px);
+            opacity: 0.9;
+        }
+
+        /* Large cloud cluster - right side */
+        .cloud-2 {
+            width: 350px;
+            height: 110px;
+            bottom: 60px;
+            right: -80px;
+            background: #fff;
+            border-radius: 100px;
+            box-shadow:
+                -60px -50px 0 35px rgba(255,255,255,0.95),
+                -140px -30px 0 45px rgba(255,255,255,0.9),
+                -200px -60px 0 30px rgba(255,255,255,0.95),
+                -80px -80px 0 25px rgba(255,255,255,0.9),
+                -260px -40px 0 40px rgba(255,255,255,0.85),
+                -320px -20px 0 30px rgba(255,255,255,0.8);
+            filter: blur(2px);
+            opacity: 0.9;
+        }
+
+        /* Center cloud - larger and more prominent */
+        .cloud-3 {
+            width: 400px;
+            height: 120px;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.95);
+            border-radius: 100px;
+            box-shadow:
+                -100px -60px 0 50px rgba(255,255,255,0.95),
+                100px -50px 0 45px rgba(255,255,255,0.95),
+                0 -80px 0 60px rgba(255,255,255,0.9),
+                -50px -100px 0 35px rgba(255,255,255,0.85),
+                60px -90px 0 40px rgba(255,255,255,0.85),
+                -150px -40px 0 35px rgba(255,255,255,0.9),
+                150px -35px 0 40px rgba(255,255,255,0.9);
+            filter: blur(3px);
+            opacity: 0.95;
+        }
+
+        /* Soft blue tint clouds for depth */
+        .cloud-tint-1 {
+            width: 250px;
+            height: 80px;
+            bottom: 120px;
+            left: 10%;
+            background: rgba(200, 220, 235, 0.6);
+            border-radius: 100px;
+            box-shadow:
+                60px -30px 0 25px rgba(200, 220, 235, 0.5),
+                120px -15px 0 35px rgba(200, 220, 235, 0.4);
+            filter: blur(15px);
+        }
+
+        .cloud-tint-2 {
+            width: 280px;
+            height: 90px;
+            bottom: 100px;
+            right: 15%;
+            background: rgba(195, 215, 230, 0.5);
+            border-radius: 100px;
+            box-shadow:
+                -50px -35px 0 30px rgba(195, 215, 230, 0.4),
+                -100px -20px 0 40px rgba(195, 215, 230, 0.35);
+            filter: blur(18px);
+        }
+
+        /* Warm accent clouds (subtle peach/cream tint like Fyxer) */
+        .cloud-warm {
+            width: 200px;
+            height: 70px;
+            bottom: 150px;
+            left: 30%;
+            background: rgba(255, 240, 225, 0.5);
+            border-radius: 100px;
+            box-shadow:
+                40px -25px 0 20px rgba(255, 240, 225, 0.4);
+            filter: blur(20px);
+        }
+
+        /* Very soft background haze */
+        .cloud-haze {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 350px;
+            height: 300px;
+            background: linear-gradient(180deg,
+                transparent 0%,
+                rgba(255,255,255,0.3) 30%,
+                rgba(255,255,255,0.7) 60%,
+                rgba(255,255,255,1) 100%
+            );
             pointer-events: none;
-        }
-
-        .cloud-layer::before {
-            content: '';
-            position: absolute;
-            bottom: 40px;
-            left: -5%;
-            width: 40%;
-            height: 180px;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-        }
-
-        .cloud-layer::after {
-            content: '';
-            position: absolute;
-            bottom: 20px;
-            right: -5%;
-            width: 45%;
-            height: 200px;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-        }
-
-        .cloud-center {
-            position: absolute;
-            bottom: 60px;
-            left: 25%;
-            width: 50%;
-            height: 160px;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 65%);
-            border-radius: 50%;
-        }
-
-        .cloud-accent-1 {
-            position: absolute;
-            bottom: 100px;
-            left: 10%;
-            width: 25%;
-            height: 120px;
-            background: radial-gradient(ellipse at center, rgba(253,235,210,0.6) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-        }
-
-        .cloud-accent-2 {
-            position: absolute;
-            bottom: 80px;
-            right: 15%;
-            width: 30%;
-            height: 140px;
-            background: radial-gradient(ellipse at center, rgba(220,235,245,0.7) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
         }
 
         /* Navigation */
@@ -117,20 +197,13 @@
         .logo-icon {
             width: 28px;
             height: 28px;
-            position: relative;
         }
 
-        .logo-icon span {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
-
-        .logo-icon .dot-green { background: #34d399; top: 0; left: 0; }
-        .logo-icon .dot-blue { background: #60a5fa; top: 0; right: 0; }
-        .logo-icon .dot-yellow { background: #fbbf24; bottom: 0; left: 0; }
-        .logo-icon .dot-pink { background: #f472b6; bottom: 0; right: 0; }
 
         .nav-links {
             display: flex;
@@ -301,6 +374,7 @@
             border: 1px solid #e0e0e0;
             border-radius: 6px;
             transition: all 0.2s;
+            background: #fff;
         }
 
         .hero-link:hover {
@@ -319,23 +393,24 @@
         .product-window {
             position: relative;
             background: #fff;
-            border-radius: 12px;
+            border-radius: 16px;
             box-shadow:
+                0 1px 2px rgba(0,0,0,0.02),
                 0 2px 4px rgba(0,0,0,0.02),
                 0 4px 8px rgba(0,0,0,0.02),
                 0 8px 16px rgba(0,0,0,0.03),
                 0 16px 32px rgba(0,0,0,0.04),
-                0 32px 64px rgba(0,0,0,0.06);
+                0 32px 64px rgba(0,0,0,0.05);
             max-width: 960px;
             margin: 0 auto;
             overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.08);
         }
 
         .window-header {
             display: flex;
             align-items: center;
-            padding: 12px 16px;
+            padding: 14px 18px;
             background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%);
             border-bottom: 1px solid #ebebeb;
             gap: 8px;
@@ -343,7 +418,7 @@
 
         .window-dots {
             display: flex;
-            gap: 6px;
+            gap: 7px;
         }
 
         .window-dot {
@@ -377,8 +452,17 @@
             font-weight: 500;
         }
 
-        .window-badge svg {
-            color: #22c55e;
+        .window-badge .ai-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.95); }
         }
 
         .inbox-content {
@@ -389,7 +473,7 @@
             display: grid;
             grid-template-columns: 48px 1fr auto;
             gap: 14px;
-            padding: 16px 20px;
+            padding: 18px 22px;
             border-bottom: 1px solid #f3f3f3;
             align-items: start;
             transition: background 0.15s;
@@ -482,11 +566,6 @@
             background: #f59e0b;
             border-radius: 50%;
             animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
         }
 
         .inbox-draft-label {
@@ -901,6 +980,11 @@
             color: #1a1a1a;
         }
 
+        .footer-brand img {
+            width: 24px;
+            height: 24px;
+        }
+
         .footer-tagline {
             font-size: 14px;
             color: #888;
@@ -938,23 +1022,53 @@
             margin-left: auto;
             margin-right: auto;
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 20px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 38px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .feature-grid,
+            .steps-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="hero-wrapper">
-        <div class="cloud-layer">
-            <div class="cloud-center"></div>
-            <div class="cloud-accent-1"></div>
-            <div class="cloud-accent-2"></div>
+        <!-- Cloud system -->
+        <div class="clouds-container">
+            <div class="cloud-haze"></div>
+            <div class="cloud-tint-1"></div>
+            <div class="cloud-tint-2"></div>
+            <div class="cloud-warm"></div>
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
         </div>
 
         <nav>
             <a href="#" class="logo">
                 <div class="logo-icon">
-                    <span class="dot-green"></span>
-                    <span class="dot-blue"></span>
-                    <span class="dot-yellow"></span>
-                    <span class="dot-pink"></span>
+                    <img src="https://cdn.footage.com/logo-sq.png" alt="Footage">
                 </div>
                 Footage
             </a>
@@ -1014,9 +1128,7 @@
                 </div>
                 <span class="window-title">Footage Library</span>
                 <div class="window-badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
+                    <span class="ai-dot"></span>
                     AI Active
                 </div>
             </div>
@@ -1249,12 +1361,7 @@
         <div class="footer-content">
             <div>
                 <div class="footer-brand">
-                    <div class="logo-icon" style="width: 24px; height: 24px;">
-                        <span class="dot-green" style="width: 8px; height: 8px;"></span>
-                        <span class="dot-blue" style="width: 8px; height: 8px;"></span>
-                        <span class="dot-yellow" style="width: 8px; height: 8px;"></span>
-                        <span class="dot-pink" style="width: 8px; height: 8px;"></span>
-                    </div>
+                    <img src="https://cdn.footage.com/logo-sq.png" alt="Footage">
                     Footage
                 </div>
                 <p class="footer-tagline">AI-powered stock footage for creators.</p>
