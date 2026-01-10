@@ -39,25 +39,28 @@
 
         .cloud-bg {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 350px;
+            bottom: -50px;
+            left: -5%;
+            right: -5%;
+            width: 110%;
+            height: 500px;
             background-image: url('./cloud-hero.png');
-            background-size: cover;
-            background-position: center bottom;
+            background-size: 100% auto;
+            background-position: center top;
             background-repeat: no-repeat;
-            opacity: 0.7;
+            opacity: 0.9;
+            z-index: 1;
         }
 
         .cloud-fade {
             position: absolute;
-            bottom: 0;
+            bottom: -50px;
             left: 0;
             right: 0;
-            height: 150px;
+            height: 200px;
             background: linear-gradient(to bottom, transparent 0%, #fff 100%);
             pointer-events: none;
+            z-index: 2;
         }
 
         /* ========== NAVIGATION ========== */
