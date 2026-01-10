@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footage | AI that finds your perfect video clips</title>
+    <title>Footage | AI Video Clip Finder</title>
     <link rel="icon" type="image/png" href="https://cdn.footage.com/logo-sq.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,158 +18,41 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: #1a1a1a;
-            line-height: 1.6;
+            line-height: 1.5;
             background: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Hero Background - Soft sky blue gradient like Fyxer */
+        /* Hero with cloud image background */
         .hero-wrapper {
             position: relative;
-            background: linear-gradient(180deg,
-                #dbe9f0 0%,
-                #e4eff4 20%,
-                #eaf3f7 40%,
-                #f0f6f9 60%,
-                #f7fafc 80%,
-                #ffffff 100%
-            );
-            padding-bottom: 120px;
+            background: linear-gradient(180deg, #e6f0f5 0%, #edf4f8 30%, #f4f8fa 60%, #fff 100%);
             overflow: hidden;
         }
 
-        /* Cloud System - Realistic fluffy clouds */
-        .clouds-container {
-            position: absolute;
-            bottom: -50px;
-            left: 0;
-            right: 0;
-            height: 400px;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        /* Individual cloud puffs using multiple box-shadows for fluffy effect */
-        .cloud {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            filter: blur(1px);
-        }
-
-        /* Large cloud cluster - left side */
-        .cloud-1 {
-            width: 300px;
-            height: 100px;
-            bottom: 80px;
-            left: -50px;
-            background: #fff;
-            border-radius: 100px;
-            box-shadow:
-                80px -40px 0 20px rgba(255,255,255,0.95),
-                160px -20px 0 40px rgba(255,255,255,0.9),
-                220px -50px 0 25px rgba(255,255,255,0.95),
-                40px -60px 0 30px rgba(255,255,255,0.9),
-                120px -70px 0 35px rgba(255,255,255,0.95),
-                280px -30px 0 20px rgba(255,255,255,0.85);
-            filter: blur(2px);
-            opacity: 0.9;
-        }
-
-        /* Large cloud cluster - right side */
-        .cloud-2 {
-            width: 350px;
-            height: 110px;
-            bottom: 60px;
-            right: -80px;
-            background: #fff;
-            border-radius: 100px;
-            box-shadow:
-                -60px -50px 0 35px rgba(255,255,255,0.95),
-                -140px -30px 0 45px rgba(255,255,255,0.9),
-                -200px -60px 0 30px rgba(255,255,255,0.95),
-                -80px -80px 0 25px rgba(255,255,255,0.9),
-                -260px -40px 0 40px rgba(255,255,255,0.85),
-                -320px -20px 0 30px rgba(255,255,255,0.8);
-            filter: blur(2px);
-            opacity: 0.9;
-        }
-
-        /* Center cloud - larger and more prominent */
-        .cloud-3 {
-            width: 400px;
-            height: 120px;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255,255,255,0.95);
-            border-radius: 100px;
-            box-shadow:
-                -100px -60px 0 50px rgba(255,255,255,0.95),
-                100px -50px 0 45px rgba(255,255,255,0.95),
-                0 -80px 0 60px rgba(255,255,255,0.9),
-                -50px -100px 0 35px rgba(255,255,255,0.85),
-                60px -90px 0 40px rgba(255,255,255,0.85),
-                -150px -40px 0 35px rgba(255,255,255,0.9),
-                150px -35px 0 40px rgba(255,255,255,0.9);
-            filter: blur(3px);
-            opacity: 0.95;
-        }
-
-        /* Soft blue tint clouds for depth */
-        .cloud-tint-1 {
-            width: 250px;
-            height: 80px;
-            bottom: 120px;
-            left: 10%;
-            background: rgba(200, 220, 235, 0.6);
-            border-radius: 100px;
-            box-shadow:
-                60px -30px 0 25px rgba(200, 220, 235, 0.5),
-                120px -15px 0 35px rgba(200, 220, 235, 0.4);
-            filter: blur(15px);
-        }
-
-        .cloud-tint-2 {
-            width: 280px;
-            height: 90px;
-            bottom: 100px;
-            right: 15%;
-            background: rgba(195, 215, 230, 0.5);
-            border-radius: 100px;
-            box-shadow:
-                -50px -35px 0 30px rgba(195, 215, 230, 0.4),
-                -100px -20px 0 40px rgba(195, 215, 230, 0.35);
-            filter: blur(18px);
-        }
-
-        /* Warm accent clouds (subtle peach/cream tint like Fyxer) */
-        .cloud-warm {
-            width: 200px;
-            height: 70px;
-            bottom: 150px;
-            left: 30%;
-            background: rgba(255, 240, 225, 0.5);
-            border-radius: 100px;
-            box-shadow:
-                40px -25px 0 20px rgba(255, 240, 225, 0.4);
-            filter: blur(20px);
-        }
-
-        /* Very soft background haze */
-        .cloud-haze {
+        /* Cloud background using real image */
+        .cloud-bg {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 300px;
-            background: linear-gradient(180deg,
-                transparent 0%,
-                rgba(255,255,255,0.3) 30%,
-                rgba(255,255,255,0.7) 60%,
-                rgba(255,255,255,1) 100%
-            );
+            height: 350px;
+            background-image: url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1920&q=80');
+            background-size: cover;
+            background-position: bottom center;
+            opacity: 0.4;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 100%);
+        }
+
+        /* Soft white overlay at bottom for smooth transition */
+        .cloud-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.8) 50%, #fff 100%);
             pointer-events: none;
         }
 
@@ -178,203 +61,217 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 48px;
-            background: transparent;
+            padding: 20px 40px;
             position: relative;
             z-index: 10;
+            max-width: 1280px;
+            margin: 0 auto;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 20px;
-            font-weight: 700;
-            color: #1a1a1a;
+            gap: 8px;
             text-decoration: none;
         }
 
-        .logo-icon {
-            width: 28px;
-            height: 28px;
+        .logo img {
+            width: 26px;
+            height: 26px;
         }
 
-        .logo-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .logo span {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
         }
 
-        .nav-links {
+        .nav-center {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 32px;
         }
 
-        .nav-links a {
+        .nav-center a {
             font-size: 14px;
-            color: #444;
+            color: #555;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s;
+            transition: color 0.15s;
         }
 
-        .nav-links a:hover {
+        .nav-center a:hover {
             color: #1a1a1a;
         }
 
-        .nav-links .dropdown {
+        .nav-dropdown {
             display: flex;
             align-items: center;
             gap: 4px;
-            cursor: pointer;
         }
 
-        .nav-links .dropdown svg {
-            width: 12px;
-            height: 12px;
+        .nav-dropdown svg {
+            width: 14px;
+            height: 14px;
             opacity: 0.5;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .btn-login {
-            padding: 10px 18px;
-            color: #444;
+        .btn-text {
+            padding: 10px 16px;
+            font-size: 14px;
+            color: #555;
             text-decoration: none;
             font-weight: 500;
-            font-size: 14px;
-            transition: color 0.2s;
         }
 
-        .btn-login:hover {
+        .btn-text:hover {
             color: #1a1a1a;
         }
 
-        .btn-primary {
-            padding: 10px 18px;
+        .btn-dark {
+            padding: 10px 20px;
             background: #1a1a1a;
             color: #fff;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 500;
             font-size: 14px;
-            transition: background 0.2s;
+            transition: background 0.15s;
         }
 
-        .btn-primary:hover {
+        .btn-dark:hover {
             background: #333;
         }
 
-        .btn-secondary {
-            padding: 10px 18px;
+        .btn-outline {
+            padding: 10px 20px;
             background: #fff;
-            color: #444;
-            border: 1px solid #e0e0e0;
+            color: #555;
+            border: 1px solid #ddd;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 500;
             font-size: 14px;
-            transition: all 0.2s;
+            transition: all 0.15s;
         }
 
-        .btn-secondary:hover {
-            border-color: #ccc;
+        .btn-outline:hover {
+            border-color: #bbb;
             color: #1a1a1a;
         }
 
-        /* Social Proof Badge */
-        .social-badge {
+        /* Hero Content */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 180px;
+            position: relative;
+            z-index: 5;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 16px;
+            padding: 6px 14px;
             background: #fff;
-            border: 1px solid #e8e8e8;
-            border-radius: 50px;
+            border: 1px solid #e5e5e5;
+            border-radius: 100px;
             font-size: 13px;
-            color: #555;
-            margin-bottom: 28px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            color: #666;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
         }
 
-        .social-badge .dot {
+        .badge-dot {
             width: 8px;
             height: 8px;
             background: #22c55e;
             border-radius: 50%;
         }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 50px 20px 60px;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 5;
-        }
-
         .hero h1 {
             font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 58px;
+            font-size: 56px;
             font-weight: 400;
-            line-height: 1.12;
+            line-height: 1.1;
             margin-bottom: 32px;
+            letter-spacing: -0.02em;
         }
 
-        .hero h1 .animated-text {
+        .hero h1 em {
             font-style: italic;
-            color: #b8b8b8;
+            color: #a0a0a0;
             display: block;
         }
 
-        .hero-buttons {
+        .hero-cta {
             display: flex;
             justify-content: center;
             gap: 12px;
             margin-bottom: 16px;
         }
 
-        .hero-buttons .btn-primary {
-            display: flex;
+        .cta-btn {
+            display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 14px 24px;
-            border-radius: 50px;
+            padding: 14px 28px;
+            border-radius: 100px;
             font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.15s;
         }
 
-        .hero-buttons .btn-secondary {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 24px;
-            border-radius: 50px;
-            font-size: 15px;
+        .cta-btn.primary {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .cta-btn.primary:hover {
+            background: #333;
+        }
+
+        .cta-btn.secondary {
             background: #fff;
+            color: #555;
+            border: 1px solid #ddd;
         }
 
-        .hero-note {
-            font-size: 13px;
+        .cta-btn.secondary:hover {
+            border-color: #bbb;
+            color: #1a1a1a;
+        }
+
+        .cta-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .hero-sub {
+            font-size: 14px;
             color: #888;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .hero-link {
             display: inline-block;
+            padding: 8px 16px;
             font-size: 14px;
             color: #555;
             text-decoration: none;
-            padding: 8px 16px;
             border: 1px solid #e0e0e0;
-            border-radius: 6px;
-            transition: all 0.2s;
+            border-radius: 8px;
             background: #fff;
+            transition: all 0.15s;
         }
 
         .hero-link:hover {
@@ -385,40 +282,37 @@
         /* Product Window */
         .product-section {
             position: relative;
-            padding: 0 48px;
             z-index: 10;
-            margin-top: -20px;
+            padding: 0 24px;
+            margin-top: -100px;
         }
 
         .product-window {
-            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
             background: #fff;
             border-radius: 16px;
+            overflow: hidden;
             box-shadow:
-                0 1px 2px rgba(0,0,0,0.02),
+                0 0 0 1px rgba(0,0,0,0.05),
                 0 2px 4px rgba(0,0,0,0.02),
                 0 4px 8px rgba(0,0,0,0.02),
-                0 8px 16px rgba(0,0,0,0.03),
+                0 8px 16px rgba(0,0,0,0.02),
                 0 16px 32px rgba(0,0,0,0.04),
-                0 32px 64px rgba(0,0,0,0.05);
-            max-width: 960px;
-            margin: 0 auto;
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.08);
+                0 32px 48px rgba(0,0,0,0.06);
         }
 
-        .window-header {
+        .window-toolbar {
             display: flex;
             align-items: center;
             padding: 14px 18px;
             background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%);
-            border-bottom: 1px solid #ebebeb;
-            gap: 8px;
+            border-bottom: 1px solid #eee;
         }
 
         .window-dots {
             display: flex;
-            gap: 7px;
+            gap: 8px;
         }
 
         .window-dot {
@@ -439,20 +333,20 @@
             font-weight: 500;
         }
 
-        .window-badge {
+        .window-status {
             display: flex;
             align-items: center;
             gap: 6px;
-            padding: 4px 10px;
+            padding: 5px 12px;
             background: #fff;
-            border: 1px solid #e8e8e8;
+            border: 1px solid #eee;
             border-radius: 6px;
             font-size: 12px;
             color: #666;
             font-weight: 500;
         }
 
-        .window-badge .ai-dot {
+        .status-dot {
             width: 8px;
             height: 8px;
             background: #22c55e;
@@ -461,84 +355,85 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(0.95); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
-        .inbox-content {
+        .window-content {
             background: #fff;
         }
 
-        .inbox-row {
-            display: grid;
-            grid-template-columns: 48px 1fr auto;
+        .list-item {
+            display: flex;
+            align-items: flex-start;
             gap: 14px;
-            padding: 18px 22px;
-            border-bottom: 1px solid #f3f3f3;
-            align-items: start;
-            transition: background 0.15s;
+            padding: 18px 20px;
+            border-bottom: 1px solid #f5f5f5;
+            transition: background 0.1s;
         }
 
-        .inbox-row:last-child {
+        .list-item:last-child {
             border-bottom: none;
         }
 
-        .inbox-row:hover {
+        .list-item:hover {
             background: #fafafa;
         }
 
         .avatar {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
             font-size: 14px;
+            font-weight: 600;
             color: #fff;
+            flex-shrink: 0;
         }
 
-        .avatar.green { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
+        .avatar.teal { background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%); }
         .avatar.blue { background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); }
-        .avatar.purple { background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%); }
+        .avatar.violet { background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%); }
 
-        .inbox-main {
+        .list-content {
+            flex: 1;
             min-width: 0;
         }
 
-        .inbox-header {
+        .list-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 3px;
+            gap: 8px;
+            margin-bottom: 2px;
         }
 
-        .inbox-sender {
-            font-weight: 600;
+        .list-name {
             font-size: 14px;
+            font-weight: 600;
             color: #1a1a1a;
         }
 
-        .inbox-tag {
+        .list-tag {
             padding: 2px 8px;
             border-radius: 4px;
             font-size: 11px;
             font-weight: 600;
         }
 
-        .inbox-tag.needs-clips { background: #fef3c7; color: #b45309; }
-        .inbox-tag.ready { background: #dbeafe; color: #1d4ed8; }
-        .inbox-tag.licensed { background: #d1fae5; color: #047857; }
+        .list-tag.orange { background: #fef3c7; color: #b45309; }
+        .list-tag.blue { background: #dbeafe; color: #1d4ed8; }
+        .list-tag.green { background: #dcfce7; color: #15803d; }
 
-        .inbox-subject {
+        .list-subject {
             font-size: 14px;
             color: #333;
-            margin-bottom: 4px;
             font-weight: 500;
+            margin-bottom: 2px;
         }
 
-        .inbox-preview {
+        .list-preview {
             font-size: 13px;
             color: #888;
             white-space: nowrap;
@@ -546,113 +441,109 @@
             text-overflow: ellipsis;
         }
 
-        .inbox-draft {
-            background: #fefce8;
-            border-radius: 8px;
-            padding: 12px 14px;
-            margin-top: 10px;
+        .list-time {
+            font-size: 12px;
+            color: #aaa;
+            flex-shrink: 0;
         }
 
-        .inbox-draft-header {
+        .ai-draft {
+            margin-top: 12px;
+            padding: 12px 14px;
+            background: #fffbeb;
+            border-radius: 8px;
+        }
+
+        .ai-draft-header {
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
-        .inbox-draft-dot {
+        .ai-draft-dot {
             width: 6px;
             height: 6px;
             background: #f59e0b;
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            animation: pulse 1.5s ease-in-out infinite;
         }
 
-        .inbox-draft-label {
-            color: #92400e;
+        .ai-draft-label {
             font-size: 12px;
             font-weight: 600;
+            color: #92400e;
         }
 
-        .inbox-draft-text {
+        .ai-draft-text {
             font-size: 13px;
             color: #78716c;
             line-height: 1.5;
         }
 
-        .inbox-time {
-            font-size: 12px;
-            color: #999;
-            white-space: nowrap;
-        }
-
         /* Logos Section */
-        .logos {
+        .logos-section {
+            padding: 80px 24px;
             text-align: center;
-            padding: 80px 40px;
-            background: #fff;
         }
 
-        .logos h3 {
+        .logos-section h3 {
             font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 400;
-            margin-bottom: 40px;
             color: #1a1a1a;
+            margin-bottom: 40px;
         }
 
-        .logos-grid {
+        .logos-row {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 36px 56px;
-            opacity: 0.45;
+            gap: 40px 60px;
+            opacity: 0.4;
         }
 
-        .logos-grid span {
-            font-size: 17px;
+        .logos-row span {
+            font-size: 16px;
             font-weight: 600;
             color: #555;
-            letter-spacing: -0.01em;
         }
 
-        /* Features Section */
-        .features {
-            padding: 100px 48px;
-            background: #fff;
-        }
-
-        .features h2 {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 38px;
-            font-weight: 400;
-            text-align: center;
-            margin-bottom: 14px;
-        }
-
-        .features > p {
-            text-align: center;
-            font-size: 17px;
-            color: #666;
-            max-width: 560px;
-            margin: 0 auto 56px;
-            line-height: 1.6;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-            max-width: 1040px;
+        /* Features */
+        .features-section {
+            padding: 80px 24px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
+        .features-section h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 36px;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .features-section > p {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            max-width: 520px;
+            margin: 0 auto 48px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
         .feature-card {
+            padding: 28px;
             background: #fafafa;
             border-radius: 12px;
-            padding: 28px;
-            transition: all 0.2s;
+            transition: background 0.15s;
         }
 
         .feature-card:hover {
@@ -667,8 +558,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 18px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         }
 
         .feature-icon svg {
@@ -677,11 +568,11 @@
             stroke: #555;
         }
 
-        .feature-card h3 {
-            font-size: 16px;
+        .feature-card h4 {
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 10px;
             color: #1a1a1a;
+            margin-bottom: 8px;
         }
 
         .feature-card p {
@@ -691,24 +582,24 @@
         }
 
         /* How It Works */
-        .how-it-works {
-            padding: 100px 48px;
+        .steps-section {
+            padding: 80px 24px;
             background: linear-gradient(180deg, #f8fafb 0%, #fff 100%);
         }
 
-        .how-it-works h2 {
+        .steps-section h2 {
             font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 38px;
+            font-size: 36px;
             font-weight: 400;
             text-align: center;
-            margin-bottom: 56px;
+            margin-bottom: 48px;
         }
 
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 48px;
-            max-width: 960px;
+            gap: 40px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -716,7 +607,7 @@
             text-align: center;
         }
 
-        .step-number {
+        .step-num {
             width: 44px;
             height: 44px;
             background: #1a1a1a;
@@ -725,16 +616,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
             font-size: 16px;
-            margin: 0 auto 20px;
+            font-weight: 600;
+            margin: 0 auto 16px;
         }
 
-        .step h3 {
-            font-size: 18px;
+        .step h4 {
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 10px;
             color: #1a1a1a;
+            margin-bottom: 8px;
         }
 
         .step p {
@@ -744,44 +635,43 @@
         }
 
         /* Testimonials */
-        .testimonials {
-            padding: 100px 48px;
-            background: #fff;
+        .testimonials-section {
+            padding: 80px 24px;
         }
 
-        .testimonials h2 {
+        .testimonials-section h2 {
             font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 38px;
+            font-size: 36px;
             font-weight: 400;
             text-align: center;
-            margin-bottom: 56px;
+            margin-bottom: 48px;
         }
 
-        .testimonial-grid {
+        .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 24px;
-            max-width: 880px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .testimonial-card {
+            padding: 28px;
             background: #fafafa;
             border-radius: 12px;
-            padding: 28px;
         }
 
-        .testimonial-card .stars {
+        .testimonial-stars {
             color: #fbbf24;
             font-size: 16px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             letter-spacing: 2px;
         }
 
-        .testimonial-card blockquote {
+        .testimonial-text {
             font-size: 15px;
-            line-height: 1.7;
             color: #333;
+            line-height: 1.7;
             margin-bottom: 20px;
         }
 
@@ -799,51 +689,51 @@
         }
 
         .testimonial-name {
-            font-weight: 600;
             font-size: 14px;
+            font-weight: 600;
             color: #1a1a1a;
         }
 
-        .testimonial-title {
+        .testimonial-role {
             font-size: 13px;
-            color: #666;
+            color: #888;
         }
 
         /* Pricing */
-        .pricing {
-            padding: 100px 48px;
+        .pricing-section {
+            padding: 80px 24px;
             background: linear-gradient(180deg, #f0f7fa 0%, #fff 100%);
         }
 
-        .pricing h2 {
+        .pricing-section h2 {
             font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 38px;
+            font-size: 36px;
             font-weight: 400;
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
-        .pricing > p {
+        .pricing-section > p {
             text-align: center;
-            font-size: 17px;
+            font-size: 16px;
             color: #666;
-            margin-bottom: 56px;
+            margin-bottom: 48px;
         }
 
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            max-width: 960px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .pricing-card {
-            background: #fff;
-            border-radius: 12px;
             padding: 28px;
+            background: #fff;
             border: 1px solid #e8e8e8;
-            transition: all 0.2s;
+            border-radius: 12px;
+            transition: border-color 0.15s;
         }
 
         .pricing-card:hover {
@@ -864,27 +754,27 @@
             background: #1a1a1a;
             color: #fff;
             padding: 4px 14px;
-            border-radius: 20px;
+            border-radius: 100px;
             font-size: 11px;
             font-weight: 600;
         }
 
         .pricing-name {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 6px;
             color: #1a1a1a;
+            margin-bottom: 4px;
         }
 
         .pricing-price {
-            font-size: 40px;
+            font-size: 36px;
             font-weight: 700;
-            margin-bottom: 4px;
             color: #1a1a1a;
+            margin-bottom: 4px;
         }
 
         .pricing-price span {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 400;
             color: #888;
         }
@@ -892,15 +782,15 @@
         .pricing-desc {
             font-size: 13px;
             color: #888;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
-        .pricing-features {
+        .pricing-list {
             list-style: none;
             margin-bottom: 24px;
         }
 
-        .pricing-features li {
+        .pricing-list li {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -909,280 +799,236 @@
             margin-bottom: 10px;
         }
 
-        .pricing-features li svg {
+        .pricing-list svg {
             width: 16px;
             height: 16px;
+            stroke: #22c55e;
             flex-shrink: 0;
         }
 
-        .pricing-card .btn-primary,
-        .pricing-card .btn-secondary {
+        .pricing-card .btn-dark,
+        .pricing-card .btn-outline {
             display: block;
             text-align: center;
             width: 100%;
-            border-radius: 8px;
         }
 
         /* CTA */
-        .cta {
-            padding: 100px 48px;
+        .cta-section {
+            padding: 80px 24px;
             text-align: center;
-            background: #fff;
         }
 
-        .cta h2 {
+        .cta-section h2 {
             font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 42px;
+            font-size: 40px;
             font-weight: 400;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
-        .cta p {
-            font-size: 17px;
+        .cta-section p {
+            font-size: 16px;
             color: #666;
-            margin-bottom: 28px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .cta-buttons .btn-primary {
-            padding: 14px 28px;
-            font-size: 15px;
-            border-radius: 8px;
+            margin-bottom: 24px;
         }
 
         /* Footer */
         footer {
+            padding: 48px 24px;
             background: #fafafa;
-            padding: 56px 48px;
             border-top: 1px solid #f0f0f0;
         }
 
-        .footer-content {
+        .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-            gap: 48px;
-            max-width: 1040px;
-            margin: 0 auto;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto 40px;
         }
 
         .footer-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #1a1a1a;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
         .footer-brand img {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
         }
 
-        .footer-tagline {
-            font-size: 14px;
-            color: #888;
-        }
-
-        .footer-column h4 {
-            font-size: 13px;
+        .footer-brand span {
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 14px;
             color: #1a1a1a;
         }
 
-        .footer-column a {
+        .footer-tagline {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .footer-col h5 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .footer-col a {
             display: block;
             font-size: 13px;
             color: #666;
             text-decoration: none;
-            margin-bottom: 10px;
-            transition: color 0.15s;
+            margin-bottom: 8px;
+            transition: color 0.1s;
         }
 
-        .footer-column a:hover {
+        .footer-col a:hover {
             color: #1a1a1a;
         }
 
         .footer-bottom {
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 1px solid #e8e8e8;
             display: flex;
             justify-content: space-between;
             font-size: 13px;
             color: #999;
-            max-width: 1040px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            nav {
-                padding: 16px 20px;
-            }
-            .nav-links {
-                display: none;
-            }
-            .hero h1 {
-                font-size: 38px;
-            }
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            .feature-grid,
-            .steps-grid,
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
+            nav { padding: 16px 20px; }
+            .nav-center { display: none; }
+            .hero { padding: 40px 20px 160px; }
+            .hero h1 { font-size: 38px; }
+            .hero-cta { flex-direction: column; align-items: center; }
+            .features-grid, .steps-grid, .pricing-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="hero-wrapper">
-        <!-- Cloud system -->
-        <div class="clouds-container">
-            <div class="cloud-haze"></div>
-            <div class="cloud-tint-1"></div>
-            <div class="cloud-tint-2"></div>
-            <div class="cloud-warm"></div>
-            <div class="cloud cloud-1"></div>
-            <div class="cloud cloud-2"></div>
-            <div class="cloud cloud-3"></div>
-        </div>
+        <div class="cloud-bg"></div>
+        <div class="cloud-fade"></div>
 
         <nav>
             <a href="#" class="logo">
-                <div class="logo-icon">
-                    <img src="https://cdn.footage.com/logo-sq.png" alt="Footage">
-                </div>
-                Footage
+                <img src="https://cdn.footage.com/logo-sq.png" alt="Footage">
+                <span>Footage</span>
             </a>
-            <div class="nav-links">
+            <div class="nav-center">
                 <a href="#">Pricing</a>
                 <a href="#">Security</a>
-                <a href="#" class="dropdown">
+                <a href="#" class="nav-dropdown">
                     For Teams
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 9l6 6 6-6"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                 </a>
                 <a href="#">Support</a>
             </div>
             <div class="nav-right">
-                <a href="#" class="btn-login">Log in</a>
-                <a href="#" class="btn-primary">Start Free Trial</a>
-                <a href="#" class="btn-secondary">Speak to sales</a>
+                <a href="#" class="btn-text">Log in</a>
+                <a href="#" class="btn-dark">Start Free Trial</a>
+                <a href="#" class="btn-outline">Speak to sales</a>
             </div>
         </nav>
 
         <section class="hero">
-            <div class="social-badge">
-                <span class="dot"></span>
+            <div class="badge">
+                <span class="badge-dot"></span>
                 Join 50,000+ video professionals
             </div>
-            <h1>Your assistant for<span class="animated-text">finding perfect footage</span></h1>
 
-            <div class="hero-buttons">
-                <a href="#" class="btn-primary">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                        <rect x="2" y="2" width="20" height="20" rx="4" fill="#ea4335"/>
-                        <path d="M10 8l6 4-6 4V8z" fill="#fff"/>
-                    </svg>
+            <h1>Your assistant for<em>finding perfect footage</em></h1>
+
+            <div class="hero-cta">
+                <a href="#" class="cta-btn primary">
+                    <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4" fill="#ea4335"/><path d="M10 8l6 4-6 4V8z" fill="#fff"/></svg>
                     Start with YouTube
                 </a>
-                <a href="#" class="btn-secondary">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                        <circle cx="12" cy="12" r="10" fill="#1ab7ea"/>
-                        <path d="M10 8l6 4-6 4V8z" fill="#fff"/>
-                    </svg>
+                <a href="#" class="cta-btn secondary">
+                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#1ab7ea"/><path d="M10 8l6 4-6 4V8z" fill="#fff"/></svg>
                     Start with Vimeo
                 </a>
             </div>
-            <p class="hero-note">Free 7-day trial · Works with all major platforms</p>
+
+            <p class="hero-sub">Free 7-day trial · Works with all major platforms</p>
             <a href="#" class="hero-link">Speak to sales</a>
         </section>
     </div>
 
     <section class="product-section">
         <div class="product-window">
-            <div class="window-header">
+            <div class="window-toolbar">
                 <div class="window-dots">
                     <div class="window-dot red"></div>
                     <div class="window-dot yellow"></div>
                     <div class="window-dot green"></div>
                 </div>
                 <span class="window-title">Footage Library</span>
-                <div class="window-badge">
-                    <span class="ai-dot"></span>
+                <div class="window-status">
+                    <span class="status-dot"></span>
                     AI Active
                 </div>
             </div>
-            <div class="inbox-content">
-                <div class="inbox-row">
-                    <div class="avatar green">SC</div>
-                    <div class="inbox-main">
-                        <div class="inbox-header">
-                            <span class="inbox-sender">Documentary Project</span>
-                            <span class="inbox-tag needs-clips">Needs Clips</span>
+            <div class="window-content">
+                <div class="list-item">
+                    <div class="avatar teal">SC</div>
+                    <div class="list-content">
+                        <div class="list-header">
+                            <span class="list-name">Documentary Project</span>
+                            <span class="list-tag orange">Needs Clips</span>
                         </div>
-                        <div class="inbox-subject">Re: B-roll for Climate Documentary</div>
-                        <div class="inbox-preview">Looking for aerial shots of glaciers and time-lapse of urban pollution...</div>
-                        <div class="inbox-draft">
-                            <div class="inbox-draft-header">
-                                <span class="inbox-draft-dot"></span>
-                                <span class="inbox-draft-label">AI finding clips...</span>
+                        <div class="list-subject">Re: B-roll for Climate Documentary</div>
+                        <div class="list-preview">Looking for aerial shots of glaciers and time-lapse of urban pollution...</div>
+                        <div class="ai-draft">
+                            <div class="ai-draft-header">
+                                <span class="ai-draft-dot"></span>
+                                <span class="ai-draft-label">AI finding clips...</span>
                             </div>
-                            <div class="inbox-draft-text">Found 847 matching clips. Top picks: Arctic glacier aerials (4K, licensed), Urban timelapse collection...</div>
+                            <div class="ai-draft-text">Found 847 matching clips. Top picks: Arctic glacier aerials (4K, licensed), Urban timelapse collection...</div>
                         </div>
                     </div>
-                    <div class="inbox-time">2:34 PM</div>
+                    <span class="list-time">2:34 PM</span>
                 </div>
-                <div class="inbox-row">
+                <div class="list-item">
                     <div class="avatar blue">JM</div>
-                    <div class="inbox-main">
-                        <div class="inbox-header">
-                            <span class="inbox-sender">Brand Campaign</span>
-                            <span class="inbox-tag ready">Ready</span>
+                    <div class="list-content">
+                        <div class="list-header">
+                            <span class="list-name">Brand Campaign</span>
+                            <span class="list-tag blue">Ready</span>
                         </div>
-                        <div class="inbox-subject">Tech Product Launch Assets</div>
-                        <div class="inbox-preview">All footage licensed and ready for the product launch next week...</div>
+                        <div class="list-subject">Tech Product Launch Assets</div>
+                        <div class="list-preview">All footage licensed and ready for the product launch next week...</div>
                     </div>
-                    <div class="inbox-time">1:15 PM</div>
+                    <span class="list-time">1:15 PM</span>
                 </div>
-                <div class="inbox-row">
-                    <div class="avatar purple">LT</div>
-                    <div class="inbox-main">
-                        <div class="inbox-header">
-                            <span class="inbox-sender">Social Media</span>
-                            <span class="inbox-tag licensed">Licensed</span>
+                <div class="list-item">
+                    <div class="avatar violet">LT</div>
+                    <div class="list-content">
+                        <div class="list-header">
+                            <span class="list-name">Social Media</span>
+                            <span class="list-tag green">Licensed</span>
                         </div>
-                        <div class="inbox-subject">Weekly Content Pack</div>
-                        <div class="inbox-preview">Your weekly curated footage pack is ready. 24 clips for Instagram, TikTok, YouTube...</div>
+                        <div class="list-subject">Weekly Content Pack</div>
+                        <div class="list-preview">Your weekly curated footage pack is ready. 24 clips for Instagram, TikTok, YouTube...</div>
                     </div>
-                    <div class="inbox-time">11:42 AM</div>
+                    <span class="list-time">11:42 AM</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="logos">
+    <section class="logos-section">
         <h3>Used by the world's leading creators</h3>
-        <div class="logos-grid">
+        <div class="logos-row">
             <span>Netflix</span>
             <span>Disney</span>
             <span>BBC</span>
@@ -1193,118 +1039,106 @@
         </div>
     </section>
 
-    <section class="features">
+    <section class="features-section">
         <h2>We find your footage</h2>
         <p>Every search automatically matched to millions of clips. AI that understands context, mood, and your brand.</p>
 
-        <div class="feature-grid">
+        <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 </div>
-                <h3>Semantic Search</h3>
+                <h4>Semantic Search</h4>
                 <p>Describe what you need in plain English. Our AI understands mood, style, composition, and context.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
                 </div>
-                <h3>Auto-Organization</h3>
+                <h4>Auto-Organization</h4>
                 <p>Clips automatically tagged and sorted by project, theme, and usage rights. No manual work needed.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <h3>Clear Licensing</h3>
+                <h4>Clear Licensing</h4>
                 <p>Every clip shows exactly what it's cleared for. Editorial, commercial, exclusive—no guessing.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
                 </div>
-                <h3>Project Boards</h3>
+                <h4>Project Boards</h4>
                 <p>Organize clips into project boards. Share with your team and collaborate in real-time.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
                 </div>
-                <h3>Instant Download</h3>
+                <h4>Instant Download</h4>
                 <p>Download in any format—4K, HD, web-optimized. Automatic transcoding for your needs.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
-                <h3>Team Access</h3>
+                <h4>Team Access</h4>
                 <p>Shared libraries with role-based permissions. Keep your team aligned and efficient.</p>
             </div>
         </div>
     </section>
 
-    <section class="how-it-works">
+    <section class="steps-section">
         <h2>How it works</h2>
         <div class="steps-grid">
             <div class="step">
-                <div class="step-number">1</div>
-                <h3>Connect your tools</h3>
+                <div class="step-num">1</div>
+                <h4>Connect your tools</h4>
                 <p>Link Premiere, After Effects, DaVinci Resolve, or any major editing software. Takes 30 seconds.</p>
             </div>
             <div class="step">
-                <div class="step-number">2</div>
-                <h3>Search naturally</h3>
+                <div class="step-num">2</div>
+                <h4>Search naturally</h4>
                 <p>Type what you need: "dramatic sunset over mountains" or "happy diverse team in office". AI finds it.</p>
             </div>
             <div class="step">
-                <div class="step-number">3</div>
-                <h3>Download & create</h3>
+                <div class="step-num">3</div>
+                <h4>Download & create</h4>
                 <p>Preview, license, and download in your preferred format. Clips import directly into your timeline.</p>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
+    <section class="testimonials-section">
         <h2>Loved by creators worldwide</h2>
-        <div class="testimonial-grid">
+        <div class="testimonials-grid">
             <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <blockquote>"Footage has cut our b-roll sourcing time by 80%. The AI actually understands what we're looking for. Game changer for documentary production."</blockquote>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Footage has cut our b-roll sourcing time by 80%. The AI actually understands what we're looking for. Game changer for documentary production."</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar"></div>
                     <div>
                         <div class="testimonial-name">Sarah Chen</div>
-                        <div class="testimonial-title">Director, National Geographic</div>
+                        <div class="testimonial-role">Director, National Geographic</div>
                     </div>
                 </div>
             </div>
             <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <blockquote>"We produce 50+ videos per month. Footage keeps everything organized and makes licensing a non-issue. Worth every penny."</blockquote>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"We produce 50+ videos per month. Footage keeps everything organized and makes licensing a non-issue. Worth every penny."</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar"></div>
                     <div>
                         <div class="testimonial-name">Marcus Johnson</div>
-                        <div class="testimonial-title">Head of Video, BuzzFeed</div>
+                        <div class="testimonial-role">Head of Video, BuzzFeed</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="pricing">
+    <section class="pricing-section">
         <h2>Simple, transparent pricing</h2>
         <p>Start free, upgrade when you're ready.</p>
         <div class="pricing-grid">
@@ -1312,83 +1146,81 @@
                 <div class="pricing-name">Starter</div>
                 <div class="pricing-price">$0 <span>/month</span></div>
                 <div class="pricing-desc">For individual creators getting started</div>
-                <ul class="pricing-features">
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 10 downloads/month</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> AI search</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> HD quality</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Editorial license</li>
+                <ul class="pricing-list">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 10 downloads/month</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> AI search</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> HD quality</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Editorial license</li>
                 </ul>
-                <a href="#" class="btn-secondary">Get Started</a>
+                <a href="#" class="btn-outline">Get Started</a>
             </div>
             <div class="pricing-card featured">
                 <div class="pricing-name">Pro</div>
                 <div class="pricing-price">$49 <span>/month</span></div>
                 <div class="pricing-desc">For professionals and small teams</div>
-                <ul class="pricing-features">
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 100 downloads/month</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Advanced AI search</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 4K quality</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Commercial license</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Team sharing</li>
+                <ul class="pricing-list">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 100 downloads/month</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Advanced AI search</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 4K quality</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Commercial license</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Team sharing</li>
                 </ul>
-                <a href="#" class="btn-primary">Start Free Trial</a>
+                <a href="#" class="btn-dark">Start Free Trial</a>
             </div>
             <div class="pricing-card">
                 <div class="pricing-name">Enterprise</div>
                 <div class="pricing-price">Custom</div>
                 <div class="pricing-desc">For large teams and organizations</div>
-                <ul class="pricing-features">
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Unlimited downloads</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Custom AI training</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 8K quality</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Exclusive licensing</li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> API access</li>
+                <ul class="pricing-list">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Unlimited downloads</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Custom AI training</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 8K quality</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Exclusive licensing</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> API access</li>
                 </ul>
-                <a href="#" class="btn-secondary">Contact Sales</a>
+                <a href="#" class="btn-outline">Contact Sales</a>
             </div>
         </div>
     </section>
 
-    <section class="cta">
+    <section class="cta-section">
         <h2>Ready to find footage faster?</h2>
         <p>Join 50,000+ video professionals who trust Footage.</p>
-        <div class="cta-buttons">
-            <a href="#" class="btn-primary">Start Free Trial</a>
-        </div>
+        <a href="#" class="btn-dark" style="padding: 14px 28px; font-size: 15px;">Start Free Trial</a>
     </section>
 
     <footer>
-        <div class="footer-content">
+        <div class="footer-grid">
             <div>
                 <div class="footer-brand">
                     <img src="https://cdn.footage.com/logo-sq.png" alt="Footage">
-                    Footage
+                    <span>Footage</span>
                 </div>
                 <p class="footer-tagline">AI-powered stock footage for creators.</p>
             </div>
-            <div class="footer-column">
-                <h4>Product</h4>
+            <div class="footer-col">
+                <h5>Product</h5>
                 <a href="#">Features</a>
                 <a href="#">Pricing</a>
                 <a href="#">API</a>
                 <a href="#">Integrations</a>
             </div>
-            <div class="footer-column">
-                <h4>Resources</h4>
+            <div class="footer-col">
+                <h5>Resources</h5>
                 <a href="#">Blog</a>
                 <a href="#">Tutorials</a>
                 <a href="#">Help Center</a>
                 <a href="#">Community</a>
             </div>
-            <div class="footer-column">
-                <h4>Company</h4>
+            <div class="footer-col">
+                <h5>Company</h5>
                 <a href="#">About</a>
                 <a href="#">Careers</a>
                 <a href="#">Press</a>
                 <a href="#">Contact</a>
             </div>
-            <div class="footer-column">
-                <h4>Legal</h4>
+            <div class="footer-col">
+                <h5>Legal</h5>
                 <a href="#">Privacy</a>
                 <a href="#">Terms</a>
                 <a href="#">Licenses</a>
